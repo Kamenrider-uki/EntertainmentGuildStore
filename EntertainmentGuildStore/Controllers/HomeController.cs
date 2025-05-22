@@ -1,32 +1,26 @@
-using System.Diagnostics;
 using EntertainmentGuildStore.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace EntertainmentGuildStore.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         public IActionResult Index()
         {
-            return View();
+            var items = new List<Item>
+            {
+                new Item { Id = 1, Name = "Game Controller", Description = "Wireless Bluetooth controller", Price = 299.99M },
+                new Item { Id = 2, Name = "Earphones", Description = "Noise Cancelling Earphones", Price = 899.00M },
+                new Item { Id = 3, Name = "Keyboard", Description = "Mechanical keyboard", Price = 699.50M }
+            };
+
+            return View(items);
         }
 
         public IActionResult Privacy()
         {
             return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

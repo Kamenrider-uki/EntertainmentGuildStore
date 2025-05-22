@@ -1,8 +1,38 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model List<EntertainmentGuildStore.Models.Item>
+
+@{
+    ViewData["Title"] = "Homepage";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<h2 class="text-center mb-4">🔥Hot products</h2>
+
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")" aria-current="true" aria-label="Slide @(i + 1)"></button>
+        }
+    </div>
+    <div class="carousel-inner">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            var item = Model[i];
+            <div class="carousel-item @(i == 0 ? "active" : "")">
+                <div class="d-flex justify-content-center align-items-center flex-column p-5" style="background-color:#ff4d4f; height: 400px; color: white; border-radius: 12px;">
+                    <h3>@item.Name</h3>
+                    <p>@item.Description</p>
+                    <h4>$@item.Price</h4>
+                    <a class="btn btn-light mt-3" href="@Url.Action("Details", "Item", new { id = item.Id })">Check Details</a>
+                </div>
+            </div>
+        }
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Last</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
 </div>
