@@ -1,0 +1,17 @@
+﻿@model IEnumerable<EntertainmentGuildStore.Models.Item>
+
+@{
+    ViewData["Title"] = "Item list";
+}
+
+<h2>Items list</h2>
+
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            <strong>@item.Name</strong> - $@item.Price
+            <a href="@Url.Action("Details", "Item", new { id = item.Id })">Check details</a>
+        </li>
+    }
+</ul> 
