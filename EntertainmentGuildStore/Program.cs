@@ -2,6 +2,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSession(); // For login/role tracking
 
 var app = builder.Build();
 
@@ -10,15 +11,18 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
 }
+
+app.UseStaticFiles();
+
 app.UseRouting();
+
+app.UseSession(); // Enable session support
 
 app.UseAuthorization();
 
-app.MapStaticAssets();
-
+// Default route: open Register page
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
+    pattern: "{controller=Account}/{action=Register}/{id?}");
 
 app.Run();

@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Registration Complete";
+    var role = ViewBag.Role as string ?? "";
+    var name = ViewBag.Name as string ?? "";
+    var email = ViewBag.Email as string ?? "";
+    var password = ViewBag.Password as string ?? "";
+    var staffId = ViewBag.StaffId as string ?? "";
+}
+
+<div class="text-center mt-5">
+    <h2>Registration Submitted</h2>
+    <p><strong>Role:</strong> @role</p>
+    <p><strong>Name:</strong> @name</p>
+    <p><strong>Email:</strong> @email</p>
+    <p><strong>Password:</strong> @password</p>
+
+    @if (!string.IsNullOrEmpty(staffId))
+    {
+        <p><strong>Staff ID:</strong> @staffId</p>
+    }
+
+    <div class="mt-4">
+        @if (role == "Customer")
+        {
+            <a class="btn btn-primary" href="@Url.Action("Index", "Home")">Go to Homepage</a>
+        }
+        else if (role == "Admin" || role == "Employee")
+        {
+            <button class="btn btn-secondary" disabled>Access to Management System </button>
+        }
+    </div>
+</div>
