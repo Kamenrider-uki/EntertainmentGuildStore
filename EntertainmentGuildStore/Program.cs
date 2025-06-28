@@ -1,8 +1,16 @@
+using EntertainmentGuildStore.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddSession(); // For login/role tracking
+
+// Register EF Core DbContext with connection string
+builder.Services.AddDbContext<EntertainmentGuildDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -16,11 +24,10 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseSession(); // Enable session support
+app.UseSession();
 
 app.UseAuthorization();
 
-// Default route: open Register page
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Account}/{action=Register}/{id?}");
