@@ -1,9 +1,14 @@
-﻿@model EntertainmentGuildStore.Models.RegisterViewModel
+﻿@{
+    Layout = "_SimpleLayout";
+}
+
+@model EntertainmentGuildStore.Models.RegisterViewModel
 
 @{
     ViewData["Title"] = "Register";
     var selectedRole = ViewBag.SelectedRole as string ?? "";
 }
+
 
 @if (string.IsNullOrEmpty(selectedRole))
 {
@@ -12,6 +17,7 @@
             margin: 0;
             padding: 0;
             height: 100%;
+            font-family: Arial, sans-serif;
             overflow: hidden;
         }
 
@@ -31,6 +37,7 @@
             .login-link a {
                 text-decoration: none;
                 font-weight: bold;
+                color: #e53935;
             }
 
         .left-image {
@@ -42,8 +49,8 @@
         }
 
             .left-image img {
-                max-width: 100%;
-                max-height: 100%;
+                max-width: 90%;
+                max-height: 90%;
                 object-fit: contain;
             }
 
@@ -92,7 +99,7 @@
         </div>
 
         <div class="left-image">
-            <img src="/images/background_register.png" alt="Register Background" />
+            <img src="/images/welcome_register.png" alt="Welcome Image" />
         </div>
 
         <div class="right-content">
@@ -108,7 +115,7 @@ else if (selectedRole == "Customer")
     <div class="container mt-5">
         <p class="text-end">
             Already have an account?
-            <a href="@Url.Action("Login", "Account")" class="text-decoration-none">Login</a>
+            <a href="@Url.Action("Login", "Account")" class="text-decoration-none text-danger fw-bold">Login</a>
         </p>
         <hr />
 

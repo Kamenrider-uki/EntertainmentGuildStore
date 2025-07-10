@@ -1,17 +1,77 @@
-﻿@model IEnumerable<EntertainmentGuildStore.Models.Item>
-
-@{
-    ViewData["Title"] = "Item list";
+﻿@{
+    Layout = "_Layout";
 }
 
-<h2>Items list</h2>
+@model List<EntertainmentGuildStore.Models.Item>
 
-<ul>
-    @foreach (var item in Model)
-    {
-        <li>
-            <strong>@item.Name</strong> - $@item.Price
-            <a href="@Url.Action("Details", "Item", new { id = item.Id })">Check details</a>
-        </li>
-    }
-</ul> 
+@{
+    ViewData["Title"] = "Homepage";
+}
+
+<h2 class="text-center mb-4">🔥 Hot Products</h2>
+
+<!-- Carousel -->
+<div id="carouselExampleIndicators" class="carousel slide mb-5" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="d-flex justify-content-center align-items-center" style="height: 300px; background-color: #ddd;">
+                <h3>Promotional Banner 1</h3>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="d-flex justify-content-center align-items-center" style="height: 300px; background-color: #ccc;">
+                <h3>Promotional Banner 2</h3>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="d-flex justify-content-center align-items-center" style="height: 300px; background-color: #bbb;">
+                <h3>Promotional Banner 3</h3>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<hr class="my-5" />
+
+<div class="row">
+    <!-- ❤️ Guess You Like -->
+    <div class="col-md-3 mb-4 d-flex">
+        <div class="card w-100 text-center" style="background-color: #FFA500; color: white;">
+            <div class="card-body d-flex flex-column justify-content-center">
+                <h4 class="fw-bold">💖 Guess You Like</h4>
+                <p>More recommended products</p>
+                <a class="btn btn-light mt-2" href="#">Explore Now</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <div class="d-flex justify-content-around mb-4">
+            <button class="btn btn-outline-primary">Category 1</button>
+            <button class="btn btn-outline-primary">Category 2</button>
+            <button class="btn btn-outline-primary">Category 3</button>
+        </div>
+
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 text-center p-3">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">@item.Description</p>
+                        <p class="text-danger fw-bold">$@item.Price</p>
+                        <a href="@Url.Action("Details", "Item", new { id = item.Id })" class="btn btn-sm btn-primary">View</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

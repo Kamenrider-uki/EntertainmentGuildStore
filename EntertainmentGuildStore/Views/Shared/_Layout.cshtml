@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var showNav = !Context.Request.Path.StartsWithSegments("/Account/Register")
+               && !Context.Request.Path.StartsWithSegments("/Account/RegisterConfirmation")
+               && !Context.Request.Path.StartsWithSegments("/Account/Login");
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -9,18 +15,43 @@
     <link rel="stylesheet" href="~/EntertainmentGuildStore.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <div class="container">
-        <main role="main" class="pb-3">
+    <div class="container-fluid px-0">
+
+        @if (showNav)
+        {
+            <header class="bg-white shadow-sm py-3 px-4 mb-3 border-bottom">
+                <div class="d-flex justify-content-between align-items-center flex-wrap">
+                    <!-- Logo -->
+                    <div class="fw-bold text-danger fs-4 mb-2 mb-md-0">
+                        🎮 EntertainmentGuildStore
+                    </div>
+
+                    <!-- Search -->
+                    <form class="d-flex flex-grow-1 mx-4" style="max-width: 500px;">
+                        <input class="form-control me-2" type="search" placeholder="Search products..." aria-label="Search">
+                        <button class="btn btn-outline-danger" type="submit">Search</button>
+                    </form>
+
+                    <!-- Right-side icons -->
+                    <div class="d-flex align-items-center flex-shrink-0">
+                        <a href="/Cart" class="btn btn-outline-dark btn-sm me-3">🛒 Cart</a>
+                        <a href="/Profile" class="btn btn-outline-dark btn-sm me-3">🙍‍ Profile</a>
+                    </div>
+                </div>
+            </header>
+        }
+
+        <main role="main" class="container pb-3">
             @RenderBody()
         </main>
-    </div>
 
-    <footer class="border-top footer text-muted mt-4">
-        <div class="container">
-            &copy; 2025 - EntertainmentGuildStore -
-            <a asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+        <footer class="border-top footer text-muted mt-4">
+            <div class="container">
+                &copy; 2025 - EntertainmentGuildStore -
+                <a asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
+    </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

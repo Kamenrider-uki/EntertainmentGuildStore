@@ -1,0 +1,51 @@
+﻿@model EntertainmentGuildStore.Models.Item
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid" />
+            <div class="mt-2">
+                <img src="@Model.SecondImageUrl" alt="@Model.Name second view" class="img-thumbnail" />
+            </div>
+            <ul class="mt-3">
+                <li>@Model.Feature1</li>
+                <li>@Model.Feature2</li>
+                <li>@Model.Feature3</li>
+                <li>@Model.Feature4</li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h2>@Model.Name</h2>
+            <p><strong>Type:</strong> @Model.Category</p>
+            <p><strong>Price:</strong> <span style="color:red;">$@Model.Price</span></p>
+            <p><strong>Condition:</strong> New</p>
+            <p><strong>Description:</strong> @Model.Description</p>
+
+            <form asp-action="AddToCart" method="post">
+                <input type="hidden" name="itemId" value="@Model.Id" />
+                <button type="submit" class="btn btn-danger btn-lg mt-3">ADD TO CART</button>
+            </form>
+
+            <div class="mt-4">
+                <h4>Explore relevant</h4>
+                <div class="row">
+                    <div class="col-4">
+                        <img src="/images/recommend1.jpg" class="img-fluid" />
+                        <p>Name</p>
+                        <p>Price</p>
+                    </div>
+                    <div class="col-4">
+                        <img src="/images/recommend2.jpg" class="img-fluid" />
+                        <p>Name</p>
+                        <p>Price</p>
+                    </div>
+                    <div class="col-4">
+                        <img src="/images/recommend3.jpg" class="img-fluid" />
+                        <p>Name</p>
+                        <p>Price</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
