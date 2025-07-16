@@ -3,17 +3,40 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-6">
-            <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid" />
-            <div class="mt-2">
-                <img src="@Model.SecondImageUrl" alt="@Model.Name second view" class="img-thumbnail" />
-            </div>
+            @if (Model.MainImage != null)
+            {
+                <img src="data:image/png;base64,@Convert.ToBase64String(Model.MainImage)"
+                     alt="@Model.Name" class="img-fluid" />
+            }
+
+            @if (Model.SideImage != null)
+            {
+                <div class="mt-2">
+                    <img src="data:image/png;base64,@Convert.ToBase64String(Model.SideImage)"
+                         alt="@Model.Name second view" class="img-thumbnail" />
+                </div>
+            }
+
             <ul class="mt-3">
-                <li>@Model.Feature1</li>
-                <li>@Model.Feature2</li>
-                <li>@Model.Feature3</li>
-                <li>@Model.Feature4</li>
+                @if (!string.IsNullOrWhiteSpace(Model.Feature1))
+                {
+                    <li>@Model.Feature1</li>
+                }
+                @if (!string.IsNullOrWhiteSpace(Model.Feature2))
+                {
+                    <li>@Model.Feature2</li>
+                }
+                @if (!string.IsNullOrWhiteSpace(Model.Feature3))
+                {
+                    <li>@Model.Feature3</li>
+                }
+                @if (!string.IsNullOrWhiteSpace(Model.Feature4))
+                {
+                    <li>@Model.Feature4</li>
+                }
             </ul>
         </div>
+
         <div class="col-md-6">
             <h2>@Model.Name</h2>
             <p><strong>Type:</strong> @Model.Category</p>

@@ -9,7 +9,6 @@
     var selectedRole = ViewBag.SelectedRole as string ?? "";
 }
 
-
 @if (string.IsNullOrEmpty(selectedRole))
 {
     <style>
@@ -120,6 +119,12 @@ else if (selectedRole == "Customer")
         <hr />
 
         <h3 class="text-center mb-4">Registering as Customer</h3>
+
+        @*  Show duplicate email error if any *@
+        @if (ViewBag.RegisterError != null)
+        {
+            <div class="alert alert-danger text-center">@ViewBag.RegisterError</div>
+        }
 
         <form asp-action="Register" method="post">
             <input type="hidden" name="Role" value="@selectedRole" />

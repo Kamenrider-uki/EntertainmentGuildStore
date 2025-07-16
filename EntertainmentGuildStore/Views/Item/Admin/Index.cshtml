@@ -1,0 +1,45 @@
+﻿@model IEnumerable<EntertainmentGuildStore.Models.Item>
+
+@{
+    Layout = "_SimpleLayout";
+    ViewData["Title"] = "Manage Products";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>📋 Product List</h2>
+        <a asp-action="Create" class="btn btn-primary">➕ Add New Item</a>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    @if (item.MainImage != null)
+                    {
+                        <img src="data:image/png;base64,@Convert.ToBase64String(item.MainImage)"
+                             class="card-img-top"
+                             alt="@item.Name"
+                             style="height: 200px; object-fit: cover;" />
+                    }
+                    else
+                    {
+                        <span class="text-muted">No image</span>
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">@item.Description</p>
+                        <p class="fw-bold text-success">Price: $@item.Price</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Edit</a>
+                        <form asp-action="Delete" asp-route-id="@item.Id" method="post" onsubmit="return confirm('Are you sure to delete this item?');">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

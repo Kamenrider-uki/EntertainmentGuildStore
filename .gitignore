@@ -396,3 +396,7 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+*.cs
+EntertainmentGuildStore/Controllers/HomeController.cs
+EntertainmentGuildStore/wwwroot/images/background_register.png
+EntertainmentGuildStore/wwwroot/images/background_register.png
