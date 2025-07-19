@@ -5,11 +5,14 @@
     ViewData["Title"] = "Manage Products";
 }
 
-<div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2>📋 Product List</h2>
-        <a asp-action="Create" class="btn btn-primary">➕ Add New Item</a>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>📋 Product List</h2>
+    <div>
+        <a asp-action="ManageUsers" asp-controller="Admin" class="btn btn-secondary me-2"> Manage Users</a>
+        <a asp-action="Create" class="btn btn-primary"> Add New Item</a>
     </div>
+</div>
+
 
     <div class="row row-cols-1 row-cols-md-3 g-4">
         @foreach (var item in Model)
@@ -28,8 +31,7 @@
                         <span class="text-muted">No image</span>
                     }
                     <div class="card-body">
-                        <h5 class="card-title">@item.Name</h5>
-                        <p class="card-text">@item.Description</p>
+                        <h5 class="card-title">@item.Name</h5>  
                         <p class="fw-bold text-success">Price: $@item.Price</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between">
@@ -42,4 +44,6 @@
             </div>
         }
     </div>
-</div>
+<a asp-action="Logout" asp-controller="Account"
+   class="btn btn-danger position-fixed"
+   style="bottom: 20px; right: 20px; z-index: 1000;">Logout</a>

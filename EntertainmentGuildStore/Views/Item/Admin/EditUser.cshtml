@@ -1,0 +1,35 @@
+﻿@model EntertainmentGuildStore.Models.User
+
+@{
+    Layout = "_SimpleLayout";
+    ViewData["Title"] = "Edit User";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">✏ Edit User</h2>
+
+    <form asp-action="EditUser" method="post">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Password" class="form-label">New Password</label>
+            <input asp-for="Password" class="form-control" type="text" />
+            <span class="form-text text-muted">Leave blank if you don't want to change the password.</span>
+        </div>
+
+        <button type="submit" class="btn btn-success">Save Changes</button>
+        <a asp-action="ManageUsers" class="btn btn-secondary">Back</a>
+    </form>
+</div>
