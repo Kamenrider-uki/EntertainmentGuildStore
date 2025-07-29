@@ -16,8 +16,8 @@ namespace EntertainmentGuildStore.Controllers
 
         private bool IsAdmin()
         {
-            var userEmail = HttpContext.Session.GetString("User");
-            return userEmail?.ToLower() == "admin@1";
+            var role = HttpContext.Session.GetString("Role");
+            return !string.IsNullOrEmpty(role) && role.Equals("Admin", StringComparison.OrdinalIgnoreCase);
         }
 
         private SelectList GetCategoryList()

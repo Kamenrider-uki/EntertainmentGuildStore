@@ -2,6 +2,8 @@
     var showNav = !Context.Request.Path.StartsWithSegments("/Account/Register")
                && !Context.Request.Path.StartsWithSegments("/Account/RegisterConfirmation")
                && !Context.Request.Path.StartsWithSegments("/Account/Login");
+
+    var isCartPage = Context.Request.Path.StartsWithSegments("/Cart");
 }
 
 <!DOCTYPE html>
@@ -21,20 +23,27 @@
         {
             <header class="bg-white shadow-sm py-3 px-4 mb-3 border-bottom">
                 <div class="d-flex justify-content-between align-items-center flex-wrap">
-                    <!-- Logo -->
+             
                     <div class="fw-bold text-danger fs-4 mb-2 mb-md-0">
-                        🎮 EntertainmentGuildStore
+                        <a asp-controller="Store" asp-action="Index" class="text-decoration-none text-danger">
+                            🎮 EntertainmentGuildStore
+                        </a>
                     </div>
 
                     <!-- Search -->
-                    <form class="d-flex flex-grow-1 mx-4" style="max-width: 500px;">
-                        <input class="form-control me-2" type="search" placeholder="Search products..." aria-label="Search">
+                    <form asp-controller="Store" asp-action="Search" method="get" class="d-flex flex-grow-1 mx-4" style="max-width: 500px;">
+                        <input class="form-control me-2" type="search" name="query" placeholder="Search products..." aria-label="Search">
                         <button class="btn btn-outline-danger" type="submit">Search</button>
                     </form>
 
+
+
                     <!-- Right-side icons -->
                     <div class="d-flex align-items-center flex-shrink-0">
-                        <a href="/Cart" class="btn btn-outline-dark btn-sm me-3">🛒 Cart</a>
+                        @if (!isCartPage)
+                        {
+                            <a asp-controller="Cart" asp-action="Index" class="btn btn-outline-dark btn-sm me-3">🛒 Cart</a>
+                        }
                         <a href="/Profile" class="btn btn-outline-dark btn-sm me-3">🙍‍ Profile</a>
                     </div>
                 </div>

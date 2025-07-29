@@ -35,15 +35,17 @@
 
 <div class="container">
     <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
-        <button class="btn btn-outline-primary">Games</button>
-        <button class="btn btn-outline-primary">Anime Figures</button>
-        <button class="btn btn-outline-primary">Peripherals</button>
-        <button class="btn btn-outline-primary">Collectibles</button>
-        <button class="btn btn-outline-primary">Console Hardware</button>
-        <button class="btn btn-outline-primary">Card Games</button>
-        <button class="btn btn-outline-primary">Plush Toys</button>
-        <button class="btn btn-outline-primary">Merchandise</button>
-        <button class="btn btn-outline-primary">Pre-Owned Deals</button>
+        <div class="d-flex flex-wrap gap-2">
+            <a asp-controller="Store" asp-action="AllProducts" asp-route-category="Games" class="btn btn-outline-primary">Games</a>
+            <a asp-controller="Store" asp-action="AllProducts" asp-route-category="Anime Figures" class="btn btn-outline-primary">Anime Figures</a>
+            <a asp-controller="Store" asp-action="AllProducts" asp-route-category="Peripherals" class="btn btn-outline-primary">Peripherals</a>
+            <a asp-controller="Store" asp-action="AllProducts" asp-route-category="Collectibles" class="btn btn-outline-primary">Collectibles</a>
+            <a asp-controller="Store" asp-action="AllProducts" asp-route-category="Console Hardware" class="btn btn-outline-primary">Console Hardware</a>
+            <a asp-controller="Store" asp-action="AllProducts" asp-route-category="Card Games" class="btn btn-outline-primary">Card Games</a>
+            <a asp-controller="Store" asp-action="AllProducts" asp-route-category="Plush Toys" class="btn btn-outline-primary">Plush Toys</a>
+            <a asp-controller="Store" asp-action="AllProducts" asp-route-category="Merchandise" class="btn btn-outline-primary">Merchandise</a>
+            <a asp-controller="Store" asp-action="AllProducts" asp-route-category="Pre-Owned Deals" class="btn btn-outline-primary">Pre-Owned Deals</a>
+        </div>
     </div>
 
     <div class="row">
@@ -53,7 +55,7 @@
                 <div class="card-body d-flex flex-column justify-content-center align-items-center">
                     <h4 class="fw-bold">💖 Guess You Like</h4>
                     <p>More recommended products</p>
-                    <a class="btn btn-light mt-2" href="#">Explore Now</a>
+                    <a asp-controller="Store" asp-action="AllProducts" asp-route-category="all" class="btn btn-primary">Explore Now</a>
                 </div>
             </div>
         </div>

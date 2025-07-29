@@ -1,0 +1,77 @@
+﻿@model List<EntertainmentGuildStore.Models.Item>
+
+@{
+    ViewData["Title"] = "All Products";
+    var categories = new List<string>
+    {
+        "Games", "Anime Figures", "Peripherals", "Collectibles", "Console Hardware",
+        "Card Games", "Plush Toys", "Merchandise", "Pre-Owned Deals", "New Arrivals", "Top Rated"
+    };
+    string selected = (ViewBag.SelectedCategory as string) ?? "all";
+}
+
+<style>
+   
+    .list-group-item.active a {
+        color: #fff !important;
+        font-weight: bold;
+    }
+
+    .list-group-item a {
+        display: block;
+        width: 100%;
+        color: #000;
+        text-decoration: none;
+    }
+
+        .list-group-item a:hover {
+            color: #dc3545;
+        }
+</style>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="list-group">
+                <li class="list-group-item @(selected == "all" ? "active" : "")">
+                    <a asp-action="AllProducts" asp-route-category="all">All</a>
+                </li>
+                @foreach (var c in categories)
+                {
+                    <li class="list-group-item @(selected == c ? "active" : "")">
+                        <a asp-action="AllProducts" asp-route-category="@c">@c</a>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <div class="col-md-9">
+            @if (!Model.Any())
+            {
+                <p>No products available in this category.</p>
+            }
+            else
+            {
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col">
+                            <div class="card h-100 shadow-sm">
+                                @if (item.MainImage != null)
+                                {
+                                    <img src="data:image/png;base64,@Convert.ToBase64String(item.MainImage)"
+                                         class="card-img-top" style="height: 200px; object-fit: cover;" />
+                                }
+                                <div class="card-body">
+                                    <h5 class="card-title">@item.Name</h5>
+                                    <p class="card-text text-danger">$@item.Price</p>
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">View</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

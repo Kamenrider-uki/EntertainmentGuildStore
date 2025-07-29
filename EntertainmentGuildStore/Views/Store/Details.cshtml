@@ -44,29 +44,35 @@
             <p><strong>Condition:</strong> New</p>
             <p><strong>Description:</strong> @Model.Description</p>
 
-            <form asp-action="AddToCart" method="post">
-                <input type="hidden" name="itemId" value="@Model.Id" />
+            <form asp-controller="Cart" asp-action="AddToCart" method="post">
+                <input type="hidden" name="id" value="@Model.Id" />
                 <button type="submit" class="btn btn-danger btn-lg mt-3">ADD TO CART</button>
             </form>
 
             <div class="mt-4">
                 <h4>Explore relevant</h4>
-                <div class="row">
-                    <div class="col-4">
-                        <img src="/images/recommend1.jpg" class="img-fluid" />
-                        <p>Name</p>
-                        <p>Price</p>
-                    </div>
-                    <div class="col-4">
-                        <img src="/images/recommend2.jpg" class="img-fluid" />
-                        <p>Name</p>
-                        <p>Price</p>
-                    </div>
-                    <div class="col-4">
-                        <img src="/images/recommend3.jpg" class="img-fluid" />
-                        <p>Name</p>
-                        <p>Price</p>
-                    </div>
+                <div class="row mt-3">
+                    @if (ViewBag.RelatedItems != null)
+                    {
+                        foreach (var related in ViewBag.RelatedItems)
+                        {
+                            <div class="col-md-4 text-center">
+                                <a asp-action="Details" asp-controller="Store" asp-route-id="@related.Id" class="text-decoration-none">
+                                    @if (related.MainImage != null)
+                                    {
+                                        <img src="data:image/png;base64,@Convert.ToBase64String(related.MainImage)"
+                                             class="img-fluid mb-2" style="height: 120px; object-fit: cover;" />
+                                    }
+                                    else
+                                    {
+                                        <img src="/images/no-image.png" class="img-fluid mb-2" style="height: 120px;" />
+                                    }
+                                    <div><strong>@related.Name</strong></div>
+                                    <div>Price: $@related.Price</div>
+                                </a>
+                            </div>
+                        }
+                    }
                 </div>
             </div>
         </div>
