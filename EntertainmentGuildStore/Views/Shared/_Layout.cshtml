@@ -36,16 +36,18 @@
                         <button class="btn btn-outline-danger" type="submit">Search</button>
                     </form>
 
-
-
                     <!-- Right-side icons -->
                     <div class="d-flex align-items-center flex-shrink-0">
                         @if (!isCartPage)
                         {
                             <a asp-controller="Cart" asp-action="Index" class="btn btn-outline-dark btn-sm me-3">🛒 Cart</a>
                         }
-                        <a href="/Profile" class="btn btn-outline-dark btn-sm me-3">🙍‍ Profile</a>
+                        @if (!Context.Request.Path.StartsWithSegments("/Profile"))
+                        {
+                            <a href="/Profile" class="btn btn-outline-dark btn-sm me-3">🙍‍ Profile</a>
+                        }
                     </div>
+
                 </div>
             </header>
         }

@@ -1,0 +1,120 @@
+﻿@model IEnumerable<EntertainmentGuildStore.Models.Order>
+@{
+    Layout = "_ProfileLayout";
+}
+<style>
+    body {
+        font-family: 'Roboto', Arial, sans-serif;
+        color: #333;
+    }
+
+    h4 {
+        font-weight: 600;
+        color: #444;
+        margin-bottom: 20px;
+    }
+
+    .list-group-item.active {
+        background-color: #673ab7 !important;
+        color: #fff !important;
+        border-color: #673ab7 !important;
+        font-weight: bold;
+    }
+
+    table.table {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 15px;
+    }
+
+    table.table th {
+        background-color: #f3f3f3;
+        color: #333;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    table.table td {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    table.table tr:hover {
+        background-color: #fafafa;
+    }
+
+    .btn-warning {
+        background-color: #ff9800;
+        border: none;
+        color: #fff;
+        font-weight: 500;
+    }
+
+    .btn-warning:hover {
+        background-color: #e68900;
+    }
+
+    .btn-danger {
+        background-color: #f44336;
+        border: none;
+        color: #fff;
+        font-weight: 500;
+    }
+
+    .btn-danger:hover {
+        background-color: #d32f2f;
+    }
+
+    .btn-primary {
+        font-weight: 500;
+    }
+</style>
+
+
+<h4 class="mb-3">🧾 Order History</h4>
+
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Order #</th>
+            <th>Date</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.Id</td>
+                <td>@order.CreatedAt.ToString("yyyy-MM-dd")</td>
+                <td>$@order.TotalAmount.ToString("0.00")</td>
+                <td>@order.Status</td>
+                <td>
+                    <div class="d-flex gap-2">
+                        @if (order.Status == "Preparing")
+                        {
+                            <!-- Change Address -->
+                            <a asp-controller="Profile" asp-action="Index"
+                               class="btn btn-warning btn-sm">Change Delivery Info</a>
+
+                            <!-- Cancel -->
+                            <form asp-action="Cancel" asp-controller="Order" method="post" style="display:inline;">
+                                <input type="hidden" name="id" value="@order.Id" />
+                                <button type="submit" class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Are you sure you want to cancel this order?');">
+                                    Cancel
+                                </button>
+                            </form>
+                        }
+
+                        <!-- View Details -->
+                        <a asp-controller="Order" asp-action="Details" asp-route-id="@order.Id"
+                           class="btn btn-primary btn-sm">View Details</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

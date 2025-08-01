@@ -1,0 +1,24 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<div class="row">
+    <div class="col-md-3 border-end">
+        <h5 class="mb-3">My Account</h5>
+        <ul class="list-group">
+            <li class="list-group-item @(Context.Request.Path.StartsWithSegments("/Profile/Index") ? "active" : "")">
+                <a asp-controller="Profile" asp-action="Index">Account Setting</a>
+            </li>
+            <li class="list-group-item @(Context.Request.Path.StartsWithSegments("/Profile/OrderHistory") ? "active" : "")">
+                <a asp-controller="Profile" asp-action="OrderHistory">Order</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="col-md-9">
+        @RenderBody()
+    </div>
+</div>
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

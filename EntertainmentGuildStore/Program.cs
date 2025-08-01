@@ -3,7 +3,12 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Session & Cache
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<EntertainmentGuildDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
@@ -12,25 +17,26 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-// MVC & DB
-builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<EntertainmentGuildDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
 var app = builder.Build();
 
+// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
 }
 
+app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
-app.UseSession(); 
-
+app.UseSession();
 app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "profile",
+    pattern: "Profile/{action=Index}/{id?}",
+    defaults: new { controller = "Profile" });
 
 app.MapControllerRoute(
     name: "default",

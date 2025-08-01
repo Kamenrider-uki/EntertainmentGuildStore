@@ -1,0 +1,74 @@
+﻿@model EntertainmentGuildStore.Models.ProfileViewModel
+
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "_ProfileLayout";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Welcome, @Model.Name</h2>
+
+    <form asp-action="Index" method="post">
+        <!-- Name -->
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label fw-bold"></label>
+            <input asp-for="Name" class="form-control" maxlength="50" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <!-- Email -->
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label fw-bold"></label>
+            <input asp-for="Email" class="form-control" readonly />
+        </div>
+
+        <!-- Country -->
+        <div class="mb-3">
+            <label asp-for="Country" class="form-label fw-bold"></label>
+            <select asp-for="Country" class="form-control">
+                <option value="">-- Select Country --</option>
+                <option>USA</option>
+                <option>UK</option>
+                <option>China</option>
+                <option>Singapore</option>
+                <option>Japan</option>
+                <option>Germany</option>
+                <option>Australia</option>
+            </select>
+            <span asp-validation-for="Country" class="text-danger"></span>
+        </div>
+
+        <!-- Phone -->
+        <div class="mb-3">
+            <label asp-for="Phone" class="form-label fw-bold"></label>
+            <input asp-for="Phone" class="form-control" maxlength="20" />
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+
+        <!-- Address -->
+        <div class="mb-3">
+            <label asp-for="Address" class="form-label fw-bold"></label>
+            <input asp-for="Address" class="form-control" maxlength="200" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+
+        <!-- Date of Birth -->
+        <div class="mb-3">
+            <label asp-for="DateOfBirth" class="form-label fw-bold"></label>
+            <input asp-for="DateOfBirth" class="form-control" placeholder="MM/DD/YYYY" />
+            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+
+    <div class="text-center mt-4">
+        <form asp-action="Logout" asp-controller="Account" method="post">
+            <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

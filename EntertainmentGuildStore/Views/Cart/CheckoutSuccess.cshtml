@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Checkout Success";
+}
+
+<div class="container mt-4 text-center">
+    <h2>Checkout Successful!</h2>
+    <p>Your order is being prepared for shipment.</p>
+    <p>You will be redirected to the homepage shortly...</p>
+</div>
+
+<script>
+    setTimeout(function () {
+        window.location.href = '/Store/Index';
+    }, 3000);
+</script>
